@@ -1,0 +1,20 @@
+FROM --platform=linux/arm64 eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+# Copiar arquivos de configuração do Maven
+COPY pom.xml .
+COPY .mvn ./.mvn
+COPY mvnw .
+
+# Dar permissão de execução ao mvnw
+RUN chmod +x mvnw
+
+# Copiar código-fonte
+COPY src ./src
+
+# Expor porta do Spring Boot
+EXPOSE 8080
+
+# Manter o container rodando
+CMD ["tail", "-f", "/dev/null"]
