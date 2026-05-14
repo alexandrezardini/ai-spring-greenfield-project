@@ -1,12 +1,11 @@
-package org.example.streamtubebackend;
+package com.streamtube.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class StreamTubeBackendApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(StreamTubeBackendApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(StreamTubeBackendApplication.class, args);
+  }
 }

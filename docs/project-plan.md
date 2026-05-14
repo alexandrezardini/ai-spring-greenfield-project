@@ -33,15 +33,16 @@ Veja o diagrama de arquitetura do projeto: [software-arch.mermaid](diagrams/soft
 
 ### Fase 01 — Configuração Base do Projeto
 
-Preparação de toda a fundação do projeto: repositório, ambiente de desenvolvimento, projetos Next.js e Spring Boot, banco de dados PostgreSQL e serviços auxiliares.
+Preparação da fundação backend do projeto: repositório, ambiente de desenvolvimento, projeto Spring Boot, banco de dados PostgreSQL e serviços auxiliares.
 
-- Repositório com estrutura de monorepo (frontend e backend)
-- Projeto Next.js (frontend) (será criado depois, não agora) e Spring boot (backend) inicializados
-- Ambiente de desenvolvimento local com todos os serviços via Docker Compose
+- Repositório com estrutura preparada para monorepo
+- Projeto Spring Boot backend inicializado em `stream-tube-backend/`
+- Projeto Next.js frontend será criado posteriormente, fora do escopo backend atual
+- Ambiente de desenvolvimento local para o backend e serviços auxiliares via Docker Compose
 - Estrutura inicial do banco de dados PostgreSQL (schema, migrations e seeds) (sem tabelas ainda)
 - Fundação de IA para coding.
 
-**Entregáveis:** ambiente de desenvolvimento funcional, banco de dados configurado.
+**Entregáveis:** ambiente de desenvolvimento backend funcional, aplicação Spring Boot inicializada e banco de dados configurado.
 
 ---
 
@@ -49,18 +50,18 @@ Preparação de toda a fundação do projeto: repositório, ambiente de desenvol
 
 > Depende de: Fase 01
 
-Fluxo completo de criação de conta, confirmação por e-mail, login, logout e recuperação de senha.
+Fluxo backend completo de criação de conta, confirmação por e-mail, login, logout e recuperação de senha.
 
 - Serviço de envio de e-mails transacionais
-- Cadastro de usuário com e-mail e senha
+- API de cadastro de usuário com e-mail e senha
 - Criação automática do canal do usuário a partir do prefixo do e-mail
-- Confirmação de conta via e-mail com link de ativação
-- Login e controle de sessão do usuário
-- Logout
-- Recuperação de senha: solicitação via e-mail → link com token → redefinição
-- Telas de cadastro, login, confirmação de conta e recuperação de senha
+- Confirmação de conta via API acionada por token enviado por e-mail
+- API de login e controle de sessão do usuário
+- API de logout
+- API de recuperação de senha: solicitação via e-mail → link com token → redefinição
+- Contratos de API necessários para futuras telas de cadastro, login, confirmação de conta e recuperação de senha no frontend Next.js
 
-**Entregáveis:** fluxo completo de cadastro → confirmação → login → recuperação de senha funcionando. Canal criado automaticamente para cada usuário.
+**Entregáveis:** APIs backend do fluxo completo de cadastro → confirmação → login → recuperação de senha funcionando. Canal criado automaticamente para cada usuário.
 
 ---
 
@@ -88,18 +89,18 @@ Upload de arquivos grandes sem travar o sistema, processamento automático do v�
 
 > Depende de: Fase 02, Fase 03
 
-Edição das informações do vídeo, fluxo de rascunho e publicação, painel de administração do canal e página pública.
+APIs backend para edição das informações do vídeo, fluxo de rascunho e publicação, gerenciamento do canal e dados da página pública.
 
 - Categorias de vídeo disponíveis na plataforma
-- Edição das informações do vídeo: título, descrição, categoria e thumbnail customizada
+- API de edição das informações do vídeo: título, descrição, categoria e thumbnail customizada
 - Visibilidade do vídeo: público (aparece para todos) ou unlisted (somente via link)
 - Fluxo de rascunho → publicação
-- Painel de gerenciamento de vídeos do canal (thumbnail, título, visualizações, likes, comentários, tempo de publicação e status)
-- Edição de vídeos a partir do painel
-- Edição das informações do canal: nickname, nome e descrição
-- Página pública do canal com informações e listagem de vídeos
+- APIs de listagem e gerenciamento de vídeos do canal (thumbnail, título, visualizações, likes, comentários, tempo de publicação e status)
+- API de edição de vídeos a partir do painel futuro
+- API de edição das informações do canal: nickname, nome e descrição
+- API pública do canal com informações e listagem de vídeos
 
-**Entregáveis:** edição completa de vídeos, rascunho/publicação, painel de gerenciamento, edição de canal, página pública do canal.
+**Entregáveis:** APIs backend para edição completa de vídeos, rascunho/publicação, gerenciamento de canal e dados públicos do canal.
 
 ---
 
@@ -107,18 +108,19 @@ Edição das informações do vídeo, fluxo de rascunho e publicação, painel d
 
 > Depende de: Fase 03, Fase 04
 
-Página onde o usuário assiste ao vídeo com player funcional, descrição, sugestões e acesso anônimo.
+APIs backend necessárias para visualização de vídeo, player futuro, descrição, sugestões e acesso anônimo.
 
-- Player de vídeo com controles: play/pause, volume e barra de progresso
-- Layout da página: vídeo principal + informações + sidebar com sugestões
-- Descrição do vídeo com expansão/recolhimento
+- API para disponibilizar dados e URLs de reprodução do vídeo
+- Dados necessários para o player futuro: URL de streaming/download, duração e metadados disponíveis
+- API para dados da página: vídeo principal + informações + sugestões
+- Descrição do vídeo disponível via API
 - Contagem de visualizações
-- Sugestões de vídeos da mesma categoria na sidebar
+- Sugestões de vídeos da mesma categoria
 - Acesso anônimo à visualização de vídeos
-- Botão de download do vídeo
+- Endpoint de download do vídeo
 - Vídeos unlisted acessíveis apenas via link direto (sem aparecer em listagens)
 
-**Entregáveis:** página de visualização com player funcional, sidebar de sugestões, download e acesso anônimo.
+**Entregáveis:** APIs backend para visualização, sugestões, download, streaming e acesso anônimo.
 
 ---
 
@@ -126,18 +128,18 @@ Página onde o usuário assiste ao vídeo com player funcional, descrição, sug
 
 > Depende de: Fase 02, Fase 05
 
-Likes/dislikes em vídeos e comentários, comentários com respostas e inscrição em canais.
+APIs backend para likes/dislikes em vídeos e comentários, comentários com respostas e inscrição em canais.
 
-- Like e dislike em vídeos (usuários autenticados)
-- Comentários em vídeos (usuários autenticados)
-- Respostas a comentários (comentários aninhados)
-- Like e dislike em comentários (usuários autenticados)
-- Inscrição em canais (seguir/deixar de seguir)
-- Área de canais seguidos com acesso rápido aos vídeos
+- API de like e dislike em vídeos (usuários autenticados)
+- API de comentários em vídeos (usuários autenticados)
+- API de respostas a comentários (comentários aninhados)
+- API de like e dislike em comentários (usuários autenticados)
+- API de inscrição em canais (seguir/deixar de seguir)
+- API de listagem de canais seguidos com acesso rápido aos vídeos
 - Contagem de inscritos na página do canal
-- Interface completa de comentários, likes e inscrições
+- Contratos de API necessários para a futura interface de comentários, likes e inscrições no frontend Next.js
 
-**Entregáveis:** likes/dislikes funcionando, comentários com respostas, inscrição em canais, listagem de canais seguidos.
+**Entregáveis:** APIs backend de likes/dislikes, comentários com respostas, inscrição em canais e listagem de canais seguidos.
 
 ---
 
@@ -145,27 +147,28 @@ Likes/dislikes em vídeos e comentários, comentários com respostas e inscriç�
 
 > Depende de: todas as fases anteriores
 
-Home page com listagem de vídeos, busca, navegação geral, responsividade e preparação para produção.
+APIs backend para home page futura, busca, navegação geral e preparação do backend para produção.
 
-- Página inicial com grid de vídeos (thumbnail, título, canal, visualizações e tempo de publicação)
-- Filtro de vídeos por categoria na home
-- Barra de busca (pesquisa por título e canal)
-- Header/navbar com logo, barra de busca, botão de login/avatar e navegação
-- Paginação ou scroll infinito nas listagens de vídeos
-- Layout responsivo para dispositivos móveis
-- Testes dos fluxos principais da plataforma
-- Ambiente de produção e deploy
+- API de listagem de vídeos para home page futura (thumbnail, título, canal, visualizações e tempo de publicação)
+- API de filtro de vídeos por categoria
+- API de busca por título e canal
+- Dados necessários para header/navbar futuro, autenticação do usuário e navegação
+- Paginação ou suporte a scroll infinito nas listagens de vídeos
+- Contratos preparados para consumo responsivo pelo frontend Next.js
+- Testes dos fluxos principais do backend
+- Ambiente de produção e deploy do backend
 
-**Entregáveis:** home page, busca, navegação, responsividade, testes realizados e ambiente de produção configurado.
+**Entregáveis:** APIs backend para home, busca, navegação, listagens paginadas, testes realizados e backend preparado para produção.
 
 ---
 
 ## 4. Pontos de Atenção
 
-- **Upload de arquivos grandes:** o upload de até 10GB precisa ser feito de forma que não trave o sistema e permita retomar em caso de falha de conexão.
+- **Upload de arquivos grandes:** o upload de até 10GB precisa ser feito de forma que não trave o backend Spring Boot e permita retomar em caso de falha de conexão.
 - **Processamento de vídeos:** a extração de informações do vídeo é pesada e deve acontecer em segundo plano, sem bloquear o usuário.
 - **URLs únicas:** cada vídeo precisa de uma URL curta e única que nunca conflite com outro vídeo.
 - **Armazenamento:** vídeos grandes consomem muito espaço. É importante planejar o crescimento e os custos de armazenamento desde o início.
 - **Streaming:** o vídeo deve começar a ser reproduzido sem que o usuário precise baixar o arquivo inteiro.
-- **Comentários aninhados:** definir até quantos níveis de resposta serão permitidos para manter a interface organizada.
-- **Like/dislike anônimo:** como qualquer usuário pode dar like/dislike, é preciso evitar abusos (ex: múltiplos likes do mesmo usuário).
+- **Comentários aninhados:** definir até quantos níveis de resposta serão permitidos para manter a interface organizada no futuro frontend Next.js.
+- **Like/dislike anônimo:** como qualquer usuário autenticado pode dar like/dislike, é preciso evitar abusos (ex: múltiplos likes do mesmo usuário).
+- **Separação de escopo:** backend deve ser sempre planejado e implementado em Spring Boot; frontend deve ser planejado e implementado separadamente em Next.js.

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/streamtube
+    username: ${POSTGRES_USER:streamtube}
+    password: ${POSTGRES_PASSWORD:streamtube}
+  docker:
+    compose:
+      enabled: false

@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-pgcrypto-extension
+      author: IA
+      changes:
+        - sql:
+            sql: CREATE EXTENSION IF NOT EXISTS "pgcrypto"
+      rollback:
+        - sql:
+            sql: DROP EXTENSION IF EXISTS "pgcrypto"
+
+  - changeSet:
+      id: 001-citext-extension
+      author: IA
+      changes:
+        - sql:
+            sql: CREATE EXTENSION IF NOT EXISTS "citext"
+      rollback:
+        - sql:
+            sql: DROP EXTENSION IF EXISTS "citext"
