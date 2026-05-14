@@ -26,10 +26,10 @@ This project runs inside Docker. Always use the container for development:
 docker compose up -d
 
 # Install dependencies (first time only)
-docker compose exec spring-boot-app mvn install
+docker compose exec spring-boot-app ./mvnw install
 
 # Run the application
-docker compose exec spring-boot-app mvn spring-boot:run
+docker compose exec spring-boot-app ./mvnw spring-boot:run
 ```
 
 Services:
