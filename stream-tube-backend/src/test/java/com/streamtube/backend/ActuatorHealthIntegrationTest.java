@@ -1,5 +1,6 @@
 package com.streamtube.backend;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,6 +37,6 @@ class ActuatorHealthIntegrationTest {
 
   @Test
   void envEndpointIsNotExposed() throws Exception {
-    mockMvc.perform(get("/actuator/env")).andExpect(status().isNotFound());
+    mockMvc.perform(get("/actuator/env").with(user("test"))).andExpect(status().isNotFound());
   }
 }

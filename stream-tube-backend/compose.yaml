@@ -39,6 +39,16 @@ services:
     networks:
       - stream-tube-network
 
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: stream-tube-mailpit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    restart: unless-stopped
+    networks:
+      - stream-tube-network
+
 volumes:
   postgres_data:
 

@@ -1,0 +1,143 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-refresh-tokens-table
+      author: IA
+      changes:
+        - createTable:
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_refresh_tokens_user_id
+                    references: users(id)
+                    deleteCascade: true
+              - column:
+                  name: family_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: token_hash
+                  type: CHAR(64)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: expires_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rotated_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: rotated_to_id
+                  type: UUID
+              - column:
+                  name: revoked_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: revoked_reason
+                  type: VARCHAR(40)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: refresh_tokens
+            baseColumnNames: rotated_to_id
+            constraintName: fk_refresh_tokens_rotated_to_id
+            referencedTableName: refresh_tokens
+            referencedColumnNames: id
+            onDelete: SET NULL
+        - createIndex:
+            indexName: idx_refresh_tokens_user_id
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: user_id
+        - createIndex:
+            indexName: idx_refresh_tokens_family_id
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: family_id
+      rollback:
+        - dropTable:
+            tableName: refresh_tokens
+
+  - changeSet:
+      id: 003-email-tokens-table
+      author: IA
+      changes:
+        - createTable:
+            tableName: email_tokens
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_email_tokens_user_id
+                    references: users(id)
+                    deleteCascade: true
+              - column:
+                  name: type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: token_hash
+                  type: CHAR(64)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: expires_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: used_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+        - sql:
+            sql: >-
+              ALTER TABLE email_tokens
+              ADD CONSTRAINT chk_email_tokens_type
+              CHECK (type IN ('CONFIRM_EMAIL','RESET_PASSWORD'));
+        - createIndex:
+            indexName: idx_email_tokens_user_id_type
+            tableName: email_tokens
+            columns:
+              - column:
+                  name: user_id
+              - column:
+                  name: type
+      rollback:
+        - dropTable:
+            tableName: email_tokens

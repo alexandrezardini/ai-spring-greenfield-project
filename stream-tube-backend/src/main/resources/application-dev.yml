@@ -6,3 +6,28 @@ spring:
   docker:
     compose:
       enabled: false
+  mail:
+    host: mailpit
+    port: 1025
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+streamtube:
+  security:
+    jwt:
+      private-key: |
+        -----BEGIN PRIVATE KEY-----
+        ---
+        -----END PRIVATE KEY-----
+      public-key: |
+        -----BEGIN PUBLIC KEY-----
+        ---
+        -----END PUBLIC KEY-----
+
+streamtube:
+  app:
+    public-url: http://localhost:8080

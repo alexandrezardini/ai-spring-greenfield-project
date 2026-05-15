@@ -5,6 +5,11 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
 management:
   endpoints:
     web:
@@ -13,6 +18,13 @@ management:
   endpoint:
     health:
       show-details: when-authorized
+
+streamtube:
+  ratelimit:
+    auth:
+      limit-for-period: 10
+      limit-refresh-period: 1m
+      timeout-duration: 0s
 
 logging:
   level:
