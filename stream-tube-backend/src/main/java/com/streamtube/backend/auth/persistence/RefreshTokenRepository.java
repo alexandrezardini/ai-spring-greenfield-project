@@ -24,4 +24,11 @@ public interface RefreshTokenRepository extends CrudRepository<RefreshToken, UUI
       @Param("familyId") UUID familyId,
       @Param("reason") String reason,
       @Param("when") Instant when);
+
+  @Modifying
+  @Query(
+      "UPDATE refresh_tokens SET revoked_at = :when, revoked_reason = :reason"
+          + " WHERE user_id = :userId AND revoked_at IS NULL")
+  int revokeAllForUser(
+      @Param("userId") UUID userId, @Param("reason") String reason, @Param("when") Instant when);
 }

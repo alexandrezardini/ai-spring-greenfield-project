@@ -63,8 +63,7 @@ class RegistrationServiceTest {
   void register_happyPath_orchestratesAllStepsAndReturnsResponse() {
     User user = User.create("alice@example.com", "hash", "Alice");
     user.setId(UUID.randomUUID());
-    Channel channel =
-        Channel.create(AggregateReference.to(user.getId()), "alice", "Alice");
+    Channel channel = Channel.create(AggregateReference.to(user.getId()), "alice", "Alice");
     channel.setId(UUID.randomUUID());
 
     when(passwordEncoder.encode("secret123")).thenReturn("encoded");
@@ -83,8 +82,7 @@ class RegistrationServiceTest {
     assertThat(response.channel().handle()).isEqualTo("alice");
 
     verify(passwordEncoder).encode("secret123");
-    verify(emailTokenRepository)
-        .save(argThat(t -> t.getType() == TokenType.CONFIRM_EMAIL));
+    verify(emailTokenRepository).save(argThat(t -> t.getType() == TokenType.CONFIRM_EMAIL));
     verify(emailService)
         .sendEmailConfirmation(
             eq("alice@example.com"),
@@ -104,8 +102,7 @@ class RegistrationServiceTest {
     when(channelRepository.findByUserId(user.getId())).thenReturn(Optional.of(channel));
     when(tokenGenerator.generate())
         .thenReturn(new OpaqueTokenGenerator.Tokens("c".repeat(64), "d".repeat(64)));
-    when(emailTokenRepository.save(any()))
-        .thenThrow(new DataAccessException("db error") {});
+    when(emailTokenRepository.save(any())).thenThrow(new DataAccessException("db error") {});
 
     assertThatThrownBy(
             () -> registrationService.register(new RegisterRequest("bob@example.com", "secret123")))

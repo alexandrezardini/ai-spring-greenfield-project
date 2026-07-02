@@ -71,8 +71,7 @@ class EmailTokenRepositoryIntegrationTest {
         emailTokenRepository.invalidatePreviousFor(user.getId(), TokenType.CONFIRM_EMAIL, when);
 
     assertThat(count).isEqualTo(2);
-    var confirmTokens =
-        (List<EmailToken>) emailTokenRepository.findAll();
+    var confirmTokens = (List<EmailToken>) emailTokenRepository.findAll();
     confirmTokens.stream()
         .filter(t -> t.getType() == TokenType.CONFIRM_EMAIL)
         .forEach(t -> assertThat(t.getUsedAt()).isNotNull());

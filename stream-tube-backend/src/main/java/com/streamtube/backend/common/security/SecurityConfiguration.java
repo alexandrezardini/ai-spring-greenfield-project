@@ -73,7 +73,13 @@ public class SecurityConfiguration {
             auth ->
                 auth.requestMatchers("/actuator/health", "/actuator/info")
                     .permitAll()
-                    .requestMatchers("/auth/**")
+                    .requestMatchers(
+                        "/auth/register",
+                        "/auth/login",
+                        "/auth/refresh",
+                        "/auth/confirm-email",
+                        "/auth/forgot-password",
+                        "/auth/reset-password")
                     .permitAll()
                     .anyRequest()
                     .authenticated())

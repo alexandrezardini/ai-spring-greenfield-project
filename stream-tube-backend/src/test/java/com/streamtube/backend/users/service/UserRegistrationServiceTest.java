@@ -66,7 +66,8 @@ class UserRegistrationServiceTest {
     when(handleGenerator.fromEmail("carol@example.com")).thenReturn("carol");
     when(channelHandleSaver.save(any(), argThat(h -> "carol".equals(h)), anyString()))
         .thenThrow(new DataIntegrityViolationException("duplicate"));
-    when(channelHandleSaver.save(any(), argThat(h -> h != null && h.startsWith("carol_")), anyString()))
+    when(channelHandleSaver.save(
+            any(), argThat(h -> h != null && h.startsWith("carol_")), anyString()))
         .thenReturn(null);
 
     User result = service.register("carol@example.com", "hash", "Carol");

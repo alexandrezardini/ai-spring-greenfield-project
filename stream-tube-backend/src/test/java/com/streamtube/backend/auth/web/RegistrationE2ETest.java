@@ -23,11 +23,16 @@ class RegistrationE2ETest {
 
   @Autowired private MockMvc mockMvc;
 
+  // Unique IP for this class so its rate-limit counter does not bleed into other E2E test classes
+  // that share the same Spring context.
+  private static final String TEST_IP = "10.201.1.1";
+
   @Test
   void register_validRequest_returns201WithBody() throws Exception {
     mockMvc
         .perform(
             post("/auth/register")
+                .header("X-Forwarded-For", TEST_IP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":\"e2e1@example.com\",\"password\":\"secure123\"}"))
         .andExpect(status().isCreated())
@@ -40,12 +45,17 @@ class RegistrationE2ETest {
   @Test
   void register_duplicateEmail_returns409() throws Exception {
     String body = "{\"email\":\"dup2@example.com\",\"password\":\"secure123\"}";
+    mockMvc.perform(
+        post("/auth/register")
+            .header("X-Forwarded-For", TEST_IP)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(body));
     mockMvc
         .perform(
-            post("/auth/register").contentType(MediaType.APPLICATION_JSON).content(body));
-    mockMvc
-        .perform(
-            post("/auth/register").contentType(MediaType.APPLICATION_JSON).content(body))
+            post("/auth/register")
+                .header("X-Forwarded-For", TEST_IP)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body))
         .andExpect(status().isConflict())
         .andExpect(jsonPath("$.error").value("EMAIL_ALREADY_EXISTS"));
   }
@@ -55,6 +65,7 @@ class RegistrationE2ETest {
     mockMvc
         .perform(
             post("/auth/register")
+                .header("X-Forwarded-For", TEST_IP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":\"not-an-email\",\"password\":\"secure123\"}"))
         .andExpect(status().isBadRequest())
@@ -66,6 +77,7 @@ class RegistrationE2ETest {
     mockMvc
         .perform(
             post("/auth/register")
+                .header("X-Forwarded-For", TEST_IP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":\"short@example.com\",\"password\":\"short\"}"))
         .andExpect(status().isBadRequest())
@@ -80,8 +92,7 @@ class RegistrationE2ETest {
           post("/auth/register")
               .header("X-Forwarded-For", ip)
               .contentType(MediaType.APPLICATION_JSON)
-              .content(
-                  "{\"email\":\"rl" + i + "@example.com\",\"password\":\"secure123\"}"));
+              .content("{\"email\":\"rl" + i + "@example.com\",\"password\":\"secure123\"}"));
     }
     mockMvc
         .perform(

@@ -68,10 +68,12 @@ class RefreshTokenRepositoryIntegrationTest {
 
     assertThat(count).isEqualTo(2);
     List<RefreshToken> family = refreshTokenRepository.findByFamilyId(familyId);
-    assertThat(family).allSatisfy(t -> {
-      assertThat(t.getRevokedAt()).isNotNull();
-      assertThat(t.getRevokedReason()).isEqualTo("TOKEN_REUSE");
-    });
+    assertThat(family)
+        .allSatisfy(
+            t -> {
+              assertThat(t.getRevokedAt()).isNotNull();
+              assertThat(t.getRevokedReason()).isEqualTo("TOKEN_REUSE");
+            });
   }
 
   @Test

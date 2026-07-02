@@ -20,9 +20,40 @@ streamtube:
     jwt:
       private-key: |
         -----BEGIN PRIVATE KEY-----
-        ---
+        MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDSwXSYKilRh716
+        SeqBGnafY7vDMNef1PyGlIHs5zNOl+UWnhOqFmyBcHKy1/uW5rb/6jcjrYyDOsln
+        Ckuhe+WroPA70l06RGbjA+5wCAqLKJTzp/WBXsGTw3nPSe05rYt5FsgIwbNO1uq+
+        Tm2zS1jI4psaj4GQPYM4oj6iofQ4dcr7vOyWH5FQvi7Q427+bv6ZB5ax2lMdkJ4k
+        zKJxH++aN3L4J0Gyybdsw0udMCtctIuhlmcl4VehDVTNtT7VdHHyHGCm/3IFmoDG
+        dqyXoMlhuUTY+AzGd2LDbaCwEiHX1wqxJxobgaHCZLwBo7DutlRYS/6HKu125BeA
+        cf0dpatRAgMBAAECggEAQgIRMG9UDZMEBz8LUXAmYvlrn1C21/pvNP9iSf6HlUAB
+        ojnUUts/FLNRWS5IQBT2j+SdbHE4pwlMdxdEZMlXP4/ibfoO9Objiop6rV/3XWpS
+        bJXYULKK0mrQxdmTkRMHsd8uu39fV3v8fao2tYcNwa0ngwQbQj/hz2URVQKAaQX6
+        AUmZ1AXsu6fKiVab47DoNv5WysIoBFYY6RQsxnB3hulxZvFEKcPADO5lDIxKVm/Z
+        ygF7eByYtM6S2JB5BnjAEzstRtCQbQ04+UMITtMK56DnnIcaUJCx87HCPNyHUQkf
+        DGgVqF46udSCi3kNKgam38M2c+cwtEOUfRELXtpHWQKBgQDvkcdC9ieKPL5zmrfM
+        nn9oKkiakbMPNZrjO7H/B1mwtX7hom4xLp972xQGWpRETpdRvkHvCZQeHzHuShkE
+        vDUvnWsSzVyj5BjgLpoVAGD/ScEGLw5gNYdsy1soArgU3q485Y0x6Rja66p5E5sP
+        NosnJzIuhd5HZ9euc69Rlw/buwKBgQDhNcggPPgkl5JmQ2bC2RqROHYGw1M09WDZ
+        U9nJK7LDzXxsg0Mj/BJdFdUPmAzjQSwQoek3dflz29BhKXJAWQgZ5Zn5o68jEeVT
+        +/Y3CNPCrUlloh8RkYX+C8gQens/tvpB4/UTkZ8w2ZSqjBvUpD2ftFR6YilLpMia
+        bkwUtzr2YwKBgGNcFcWq6/lEekTeHW7rKbJdHyGkXhxnwiaOgqNgPA2zKL2SLZuO
+        V6z5ztNXy/iMk+veOeBXG6xmicHnz3qMSI7H/jmdHNgIaVzJVzRwpMocn8bdy1uR
+        t+oiaVstzYUyWhd9qVLS93EMnvZ6cCweFhaWBhUPhoIdCnIbHtJ7EaOzAoGBAKFR
+        ROjSw2xypgtafGFV4hHjv6dYgmGM4rLJvVa8VnCq4FVaMN210fGbkeJ5p8GhDU9c
+        qxFvECBNdBYk+hHdtE/Yh1KqTOlyCDMAaH1DdWwddFW4q0iKVNCE3+nt0hrxlpFc
+        GFDMHpt/P15qvgSzIPEk2t5PMgVdI9R67URpe3LBAoGBAJYzcqaGojLQ/yAzgA7p
+        dWFE5kFYZg2W3kuhEc6WAg+25q70giDqkmTf6ltnD4UQqI6NTYBS8980qWpc+EWQ
+        6GGhkN20dc7bafWzBd/VSzKqfMVOJ0N/h5TSwFNOO2je5AxREbHV2mwLbRKQ1kRR
+        n7G9NG8EEWwvafbqeT5g4bRf
         -----END PRIVATE KEY-----
       public-key: |
         -----BEGIN PUBLIC KEY-----
-        ---
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0sF0mCopUYe9eknqgRp2
+        n2O7wzDXn9T8hpSB7OczTpflFp4TqhZsgXBystf7lua2/+o3I62MgzrJZwpLoXvl
+        q6DwO9JdOkRm4wPucAgKiyiU86f1gV7Bk8N5z0ntOa2LeRbICMGzTtbqvk5ts0tY
+        yOKbGo+BkD2DOKI+oqH0OHXK+7zslh+RUL4u0ONu/m7+mQeWsdpTHZCeJMyicR/v
+        mjdy+CdBssm3bMNLnTArXLSLoZZnJeFXoQ1UzbU+1XRx8hxgpv9yBZqAxnasl6DJ
+        YblE2PgMxndiw22gsBIh19cKsScaG4GhwmS8AaOw7rZUWEv+hyrtduQXgHH9HaWr
+        UQIDAQAB
         -----END PUBLIC KEY-----

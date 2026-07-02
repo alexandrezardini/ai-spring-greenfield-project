@@ -1,6 +1,7 @@
 package com.streamtube.backend.common.security;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.streamtube.backend.TestcontainersConfiguration;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -41,7 +43,9 @@ class SecurityFilterChainIntegrationTest {
 
   @Test
   void authEndpoint_isAccessibleWithoutAuthentication() throws Exception {
-    mockMvc.perform(get("/auth/stub")).andExpect(status().isOk());
+    mockMvc
+        .perform(post("/auth/register").contentType(MediaType.APPLICATION_JSON).content("{}"))
+        .andExpect(status().isBadRequest());
   }
 
   @Test
